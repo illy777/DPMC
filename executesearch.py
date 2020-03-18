@@ -3,6 +3,7 @@ from tkinter import *
 from PIL import ImageTk, Image
 import os
 import csv
+from classes import *
 
 
 # with open("Datafolder\\7.02671.29.0.csv", "r") as f:
@@ -59,7 +60,7 @@ def auswahl(*args):
                     liste2.append(element[3])
                 continue
         if len(liste2) == 0:
-            global dat
+            # global dat
             dat = data(sel1, sel1)
             liste3 = []
             liste3.append(soll_zahl)
@@ -70,9 +71,9 @@ def auswahl(*args):
         else:
             dat = data("", sel1)
             update_auswahl(liste2)
-        return dat
+            return dat ##!!HIER IST DER FEHLER
     except:
-        sel = files_list.curselection()
+        sel = files_list.curselection() ##DAT MUSS HIERHER "TRANSPORTIERT" WERDEN; NACHDEM ELSE AUSGEFÜHRT WURDE
         sel1 = files_list.get(sel[0])
         ndat = data(sel1,dat.Sachnummer)
         liste3 = []
