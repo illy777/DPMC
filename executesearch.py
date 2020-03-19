@@ -73,7 +73,7 @@ def auswahl(*args):
             update_auswahl(liste2)
             return dat ##!!HIER IST DER FEHLER
     except:
-        sel = files_list.curselection() ##DAT MUSS HIERHER "TRANSPORTIERT" WERDEN; NACHDEM ELSE AUSGEFÜHRT WURDE
+        sel = files_list.curselection() ##"DAT" MUSS HIERHER "TRANSPORTIERT" WERDEN; NACHDEM ELSE AUSGEFÜHRT WURDE
         sel1 = files_list.get(sel[0])
         ndat = data(sel1,dat.Sachnummer)
         liste3 = []
