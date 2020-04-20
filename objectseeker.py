@@ -1,10 +1,16 @@
-import csv
 import os
+import csv
 from classes import *
 import sys
-sys.path.append("Temp")
-from temp2 import data
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
 
+    return os.path.join(base_path, relative_path)
+sys.path.append(resource_path("Temp"))
+from temp2 import data
 
 
 
@@ -17,12 +23,23 @@ if ".csv" in KomponentennummerPumpe:
     KomponentennummerPumpe = KomponentennummerPumpe.replace(".csv", "")
 
 
-# with open(log, "r+") as f:
-#                 f.truncate(0)
-#                 f.close()
-#             objectsearch()
+def which_obj(Sachnummer):
+    with open("Temp\\searchlog.py","r+") as f:
+        elements = f.readlines()
+        liste = []
+        if len(elements) >= 10:
+            raise ValueError("Maximun erreicht!")
+        else:
+            for objects in elements:
+                liste.append(objects.split(":")[0])
+            for i in range(len(elements)+1):
+                if len(elements) == 0 or "Pumpe"+str(i) not in liste:
+                    f.write("Pumpe"+str(i)+": "+str(Sachnummer)+"\n")
+    f.close()
 
-def objectsearch():
+
+
+def objectsearch(SOLL, KomponentennummerPumpe,Sachnummer,file):
     fdict = {} #temp_dict
     y = 0
     i = 0
@@ -72,7 +89,7 @@ def objectsearch():
                 S = Schutzhuelse(fdict["Komponentennummer"],fdict["Menge"])  
                 S.descript(str(i))
                 i=i+1
-            elif "SCHRAUBE" in str(fdict["Objektkurztext"]):
+            elif "SCHRAUBE" in str(fdict["Objektkurztext"]) and "PT" not in str(fdict["Objektkurztext"]):
                 SC = Schraube(fdict["Komponentennummer"],fdict["Menge"])
                 SC.descript(str(i))
                 i=i+1
@@ -117,6 +134,10 @@ def objectsearch():
                 SS.descript(str(i))
                 i = i+1
                 #Schmierstoff
+            elif "PT-" in str(fdict["Objektkurztext"]):
+                PT = PTSchraube(fdict["Komponentennummer"],fdict["Menge"])
+                PT.descript(str(i))
+                i = i+1
             print(element)
            
 
@@ -128,7 +149,8 @@ if (len(str(Sachnummer)) > 4):
                     csv_reader = csv.reader(f, dialect="excel",delimiter=";")
                     liste = list(csv_reader)
                     f.close
-                objectsearch()
+                objectsearch(SOLL, KomponentennummerPumpe, Sachnummer, file)
+                which_obj(Sachnummer)
 else:
     for files in os.walk("Datafolder"):
         Path = files[0]
@@ -137,7 +159,8 @@ else:
                 csv_reader = csv.reader(f, dialect="excel",delimiter=";")
                 liste = list(csv_reader)
                 f.close
-            objectsearch()
+            objectsearch(SOLL, KomponentennummerPumpe, Sachnummer, file)
+            which_obj(Sachnummer)
 
 
 
