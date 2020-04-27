@@ -9,7 +9,6 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 sys.path.append(resource_path("Temp"))
 from temp import *
-from log import*
 
 dic = locals().copy()
 list = ["__name__","__cached__","__doc__","__file__","__builtins__","__package__","__loader__","__spec__","__annotations__","__module__", "sys", "resource_path","os"]

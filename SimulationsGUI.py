@@ -132,7 +132,10 @@ class simulations():
                     else:
                         for item in dic2[remove_digits(key)]:
                             if liste[1] == item[1] and liste != item:
-                                dic2[remove_digits(key)][j][0][i] = liste[0][i]
+                                try:
+                                    dic2[remove_digits(key)][j][0][i] = liste[0][i]
+                                except:
+                                    dic2[remove_digits(key)][j][0].append(liste[0][i])
                             j = j+1
                         if liste[1] not in [item[1] for item in dic2[remove_digits(key)]]:
                             dic2[remove_digits(key)].append(liste)
@@ -176,7 +179,7 @@ class simulations():
                 Komponenten.append(items)
         #Darstellung:
         fig,ax = plt.subplots()
-        width = 0.15
+        width = 0.07
         for i, elements in enumerate(Pumpen):
             N = len(elements)
             ind = np.arange(N)
@@ -186,7 +189,7 @@ class simulations():
         ax.grid(True, axis="x")
         ax.set_yticklabels([Components for Components in Komponenten])
         ax.set_title('Materialverbrauch pro Pumpe')
-        ax.set_yticks(ind + width)
+        ax.set_yticks(ind + 0.5*width*len(index))
         ax.autoscale_view()
         plt.show() 
         # this list  shalls plot all components for every Pump.
@@ -226,7 +229,7 @@ class simulations():
         ax.legend((p1[0],p2[0]),("Mengen", "Durchschnitt/Regelkreis"))
         ax.set_yticklabels([Components for Components in Komponenten])
         ax.set_title('Gesamtanzahl an benötigten Materialien')
-        ax.set_yticks(ind + width)
+        ax.set_yticks(ind + 0.5*width*len(index))
         ax.autoscale_view()
         plt.show() 
 

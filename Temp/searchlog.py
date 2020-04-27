@@ -1,0 +1,10 @@
+Pumpe0: 7.01713.16.0.csv
+Pumpe1: 7.04071.16.0.csv
+Pumpe2: 7.04071.08.0.csv
+Pumpe3: 7.04071.08.0.csv
+Pumpe4: 7.04071.16.1.csv
+Pumpe5: 7.04071.18.0.csv
+Pumpe6: 7.04071.21.0.csv
+Pumpe7: 7.04071.22.0.csv
+Pumpe8: 7.04071.23.0.csv
+Pumpe9: 7.04071.25.0.csv
